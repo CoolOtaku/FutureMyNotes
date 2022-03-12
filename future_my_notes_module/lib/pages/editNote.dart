@@ -113,7 +113,7 @@ class _EditNoteState extends State<EditNote> {
               shrinkWrap: true,
               itemCount: list.length,
               itemBuilder: (BuildContext context, int index) {
-                return EditNoteList(context, list, index, _deleteEditItem);
+                return EditNoteList(context, list, index, _deleteEditItem, _changeImage);
               }
             ),
           )
@@ -146,7 +146,6 @@ class _EditNoteState extends State<EditNote> {
       });
     }
   }
-
   Future<void> _selectAddNewElement(String el) async {
     DataInNote loc = DataInNote(type: "text", data: "");
     switch(el){
@@ -164,7 +163,6 @@ class _EditNoteState extends State<EditNote> {
       list.add(loc);
     });
   }
-
   void _saveEditNote() async {
     if(nameNewNote.isNotEmpty){
       File localFile = await widget.storageNote.getFile(widget.localNote.getName);
@@ -187,17 +185,24 @@ class _EditNoteState extends State<EditNote> {
     Navigator.pop(context, 'Back');
     return Future.value(false);
   }
-
   Future<File> changeFileNameOnly(File file, String newFileName) {
     var path = file.path;
     var lastSeparator = path.lastIndexOf(Platform.pathSeparator);
     var newPath = path.substring(0, lastSeparator + 1) + newFileName;
     return file.rename(newPath);
   }
-
-  void _deleteEditItem(List<DataInNote> list, int index){
+  void _deleteEditItem(int index){
+    Navigator.pop(context, 'OK');
     setState(() {
       list.remove(list[index]);
+    });
+  }
+  void _changeImage(int index) async {
+    var imageFilePath = await ImagePicker().pickImage(source: ImageSource.gallery);
+    final bytes = File(imageFilePath!.path).readAsBytesSync();
+    String _img64 = base64Encode(bytes);
+    setState(() {
+      list[index].data = _img64;
     });
   }
 }

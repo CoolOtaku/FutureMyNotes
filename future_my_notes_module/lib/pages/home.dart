@@ -51,9 +51,12 @@ class _HomeState extends State<Home> {
             ),
             IconButton(
               icon: Icon(Icons.search),
-              onPressed: () => showDialog<String>(
+              onPressed: () => showDialog(
+                barrierColor: Colors.transparent,
                 context: context,
-                builder: (BuildContext context) => SearchDialog(filterSearchResults),
+                builder: (BuildContext context){
+                  return SearchDialog(filterSearchResults);
+                }
               ),
             ),
           ],
@@ -105,11 +108,11 @@ class _HomeState extends State<Home> {
     });
   }
 
-  void _deleteNote(BuildContext context, String name){
+  void _deleteNote(BuildContext context, String name, int index){
+    Navigator.pop(context, 'OK');
+    widget.storage.deleteFile(name);
     setState(() {
-      Navigator.pop(context, 'OK');
-      widget.storage.deleteFile(name);
-      _getNotes();
+      noteList.remove(noteList[index]);
     });
   }
 
@@ -129,10 +132,8 @@ class _HomeState extends State<Home> {
     }else{
       ViewSnack(context, "Нотатка з такою назвою уже існує!", false);
     }
-    setState(() {
-      _getNotes();
-      Navigator.pop(context, 'OK');
-    });
+    Navigator.pop(context, 'OK');
+    _getNotes();
   }
 
   void filterSearchResults(String query) {

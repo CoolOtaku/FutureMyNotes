@@ -142,7 +142,7 @@ Dismissible CardNoteList(BuildContext context, List<Note> noteList, int index, F
                 icon: Icon(Icons.delete,color: Colors.white),
                 onPressed: () => showDialog<String>(
                   context: context,
-                  builder: (BuildContext context) => DeleteNoteDialog(context, _deleteNote, noteList[index].getName),
+                  builder: (BuildContext context) => DeleteNoteDialog(context, _deleteNote, noteList[index].getName, index),
                 ),
               ),
               SizedBox(width: 10),
@@ -153,7 +153,7 @@ Dismissible CardNoteList(BuildContext context, List<Note> noteList, int index, F
     ),
     confirmDismiss: (DismissDirection dismissDirection) async {
       showDialog<String>(context: context,
-        builder: (BuildContext context) => DeleteNoteDialog(context, _deleteNote, noteList[index].getName),
+        builder: (BuildContext context) => DeleteNoteDialog(context, _deleteNote, noteList[index].getName, index),
       );
       if(noteList[index] != null){
         return false;
@@ -164,7 +164,7 @@ Dismissible CardNoteList(BuildContext context, List<Note> noteList, int index, F
   );
 }
 
-AlertDialog DeleteNoteDialog(BuildContext context, Function _deleteNote, String name){
+AlertDialog DeleteNoteDialog(BuildContext context, Function _deleteNote, String name, int index){
   return AlertDialog(
     backgroundColor: Colors.grey[850],
     title: const Text('Видалення нотатки!'),
@@ -176,7 +176,7 @@ AlertDialog DeleteNoteDialog(BuildContext context, Function _deleteNote, String 
       ),
       TextButton(
         child: const Text('Так',style: TextStyle(color: Colors.white)),
-        onPressed: () => _deleteNote(context, name),
+        onPressed: () => _deleteNote(context, name, index),
       ),
     ],
   );
