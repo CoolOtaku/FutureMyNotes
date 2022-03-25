@@ -19,6 +19,7 @@ dependencies:
   intl: ^0.17.0
   image_picker: ^0.8.4+8
   json_annotation: ^4.0.1
+  contactus: ^1.2.0
 
 dev_dependencies:
   flutter_test:
@@ -40,5 +41,6 @@ flutter:
     - src/img/gerb.png
     - src/img/milytary_anime.png
     - src/img/rusian_fack_you.png
+    - src/img/dev_image.jpg
 
 

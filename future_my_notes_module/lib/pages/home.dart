@@ -8,6 +8,7 @@ import 'package:FutureMyNotes/other/IconNoteStorage.dart';
 import 'package:FutureMyNotes/obj/note.dart';
 import 'package:FutureMyNotes/other/helperHome.dart';
 import 'package:FutureMyNotes/other/helper.dart';
+import 'devContacts.dart';
 
 class Home extends StatefulWidget {
   Home({Key? key}) : super(key: key);
@@ -42,7 +43,12 @@ class _HomeState extends State<Home> {
           ),
           leading: Container(
             margin: EdgeInsets.only(left: 8, bottom: 8, top: 8),
-            child: Image.asset("src/img/logo.png"),
+            child: GestureDetector(
+              child: Image.asset("src/img/logo.png"),
+              onTap: () => Navigator.push(context, MaterialPageRoute(
+                builder: (context) => Contacts(),
+              )),
+            )
           ),
           actions: <Widget>[
             IconButton(
@@ -111,8 +117,13 @@ class _HomeState extends State<Home> {
   void _deleteNote(BuildContext context, String name, int index){
     Navigator.pop(context, 'OK');
     widget.storage.deleteFile(name);
+    widget.storageIcons.deleteFile(name);
     setState(() {
-      noteList.remove(noteList[index]);
+      if(noteList.remove(noteList[index])){
+        ViewSnack(context,"Нотатку видалено!",true);
+      }else{
+        ViewSnack(context,"Сталася помилка при видаленні!",false);
+      }
     });
   }
 
@@ -133,6 +144,7 @@ class _HomeState extends State<Home> {
       ViewSnack(context, "Нотатка з такою назвою уже існує!", false);
     }
     Navigator.pop(context, 'OK');
+    ViewSnack(context, "Нотатку створено!", true);
     _getNotes();
   }
 

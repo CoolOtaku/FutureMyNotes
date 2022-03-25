@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:FutureMyNotes/other/NoteStorage.dart';
 import 'package:FutureMyNotes/obj/note.dart';
 import 'package:FutureMyNotes/obj/DataInNote.dart';
-import 'package:FutureMyNotes/other/helperViewNote.dart';
 
 class ViewNote extends StatefulWidget {
   ViewNote({Key? key, required this.localNote}) : super(key: key);
@@ -20,6 +19,8 @@ class _ViewNoteState extends State<ViewNote> {
 
   List<dynamic> listData = [];
   List<DataInNote> list = [];
+  var alignText = TextAlign.left;
+  var alignRow= MainAxisAlignment.start;
 
   @override
   void initState() {
@@ -37,11 +38,25 @@ class _ViewNoteState extends State<ViewNote> {
         ),
         actions: [
           IconButton(
-            icon: Image.asset("src/img/gerb.png"),
-            onPressed: () => showDialog<String>(
-              context: context,
-              builder: (BuildContext context) => ViewRusianFackYouDialog(),
-            ),
+            icon: Icon(Icons.align_horizontal_left),
+            onPressed: () => setState(() {
+              alignText = TextAlign.left;
+              alignRow = MainAxisAlignment.start;
+            }),
+          ),
+          IconButton(
+            icon: Icon(Icons.align_horizontal_center),
+            onPressed: () => setState(() {
+              alignText = TextAlign.center;
+              alignRow = MainAxisAlignment.center;
+            }),
+          ),
+          IconButton(
+            icon: Icon(Icons.align_horizontal_right),
+            onPressed: () => setState(() {
+              alignText = TextAlign.right;
+              alignRow = MainAxisAlignment.end;
+            }),
           ),
         ],
       ),
@@ -101,7 +116,7 @@ class _ViewNoteState extends State<ViewNote> {
     for(var i = 0; i < list.length; i++){
       listWidget.add(new SizedBox(height: 8));
       list[i].type == 'text' ?
-        listWidget.add(new Text(list[i].data))
+        listWidget.add(new Row(children:[Text(Note.parseDataInViews(list[i].data),textAlign:alignText)],mainAxisAlignment:alignRow))
       :
         listWidget.add(new InteractiveViewer(clipBehavior: Clip.none, child: Image.memory(base64Decode(list[i].data))));
     }

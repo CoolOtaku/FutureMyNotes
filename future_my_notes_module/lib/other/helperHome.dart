@@ -114,7 +114,6 @@ Dismissible CardNoteList(BuildContext context, List<Note> noteList, int index, F
                   )
                 ),
                 onPressed: () {
-                  //
                   Navigator.push(context, MaterialPageRoute(
                     builder: (context) => ViewNote(localNote: noteList[index]),
                   ));
