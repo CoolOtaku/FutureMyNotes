@@ -31,9 +31,7 @@ This is my course work created for, Android and iOS on the flutter.
   <img src="screens/12.png" height="400px"/>
 </p>
 
-## Others
-
-### License
+## License
 
 ```
 © 2022, CoolOtaku (ericspz531@gmail.com)
