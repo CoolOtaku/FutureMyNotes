@@ -1,8 +1,6 @@
-# FutureMyNotes</h1>
-
 <p align="center"><img width="128" height="128" src="future_my_notes_module/src/img/logo.png" /></p>
 
-#
+# FutureMyNotes</h1>
 
 <b>EN:</b>
 
