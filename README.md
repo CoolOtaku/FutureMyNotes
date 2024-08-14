@@ -4,11 +4,11 @@
 ## Description
 <b>EN:</b>
 
-This is my coursework created for **Android** and **iOS** using the **Flutter** framework. The project is notes with text and pictures.
+This is my coursework created for **Android** and **iOS** using the [**Flutter**](https://flutter.dev) framework. The project is notes with text and pictures.
 
 <b>UA:</b>
 
-Це моя курсова робота, створена для **Android** та **iOS** на фреймворку **Flutter**. Проект представляє собою нотатки з текстом і картинками.
+Це моя курсова робота, створена для **Android** та **iOS** на фреймворку [**Flutter**](https://flutter.dev). Проект представляє собою нотатки з текстом і картинками.
 
 #
 ## Screenshots
